@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+    
+    
+    <p>Please click the search button</p>
+    <input type = "text" id = "str" >
+  <button id="button">Search</button>
+  <button id="all"> All definition</button>
+  
+  <div id=resultHeading>Result</div>
+    <div id="reply"></div>
+   
+  
+  
+
+<script>
+   // window.onload function(){
+    document.getElementById("button").addEventListener('click', function() {
+        
+        if (window.XMLHttpRequest){
+            httpRequest = new XMLHttpRequest();
+        }
+        else if (window.ActiveObject) {
+             httpRequest = new ActiveObject ("Microsoft.XMLHTTP");
+        };
+        
+        var word = document.getElementById("str").value;
+        
+        httpRequest.onreadystatechange = function() {
+            if (httpRequest.readyState == XMLHttpRequest.DONE){
+                if (httpRequest.status == 200){
+                   
+                   
+                   //var holdvalue = httpRequest.responseText;
+                    document.getElementById("reply").innerHTML = (httpRequest.responseText);
+                  
+                }
+                else {
+                    alert ("request could not be precessed");
+                }
+            }
+        };
+        console.log(word);
+        httpRequest.open('GET',"https://infolab6-frizzy5.c9users.io/request.php/?q=" + word, true);
+        httpRequest.send(null);
+        
+        
+    });
+    
+  
+    //}    
+</script>
+</body>
+</html>
